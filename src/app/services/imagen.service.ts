@@ -7,8 +7,11 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ImagenService {
+
+  private error$ = new Subject<string>();
+  private terminoBusqueda$ = new Subject<string>();
  
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
  }
