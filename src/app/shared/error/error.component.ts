@@ -9,14 +9,32 @@ import { ImagenService } from '../../services/imagen.service';
 })
 export class ErrorComponent implements OnInit {
 
+  texto = '';
+  mostrar = false;
+  suscripcion: Subscription;
 
 
-
-  constructor() {
-   
+  constructor(private _imagenService: ImagenService) {
+    this.suscripcion = this._imagenService.getError().subscribe(data =>{
+      this.mostrarMensaje()
+      this.texto = data;
+    })
    }
 
+   
+
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void{
+    this.suscripcion.unsubscribe();
+  }
+
+  mostrarMensaje(){
+    this.mostrar = true;
+    setTimeout(() => {
+      this.mostrar = false;
+    }, 2000);
   }
 
 
